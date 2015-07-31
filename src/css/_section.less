@@ -1,0 +1,46 @@
+.section-slanted {
+    position: relative;
+    z-index: 0;
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+
+        // Unfortunately we can't calulate this precisely, since
+        // the extra space needed is relative to the element's height,
+        // not the width. And CSS doesn't do that. So just say -50%.
+        left: -50%;
+        right: -50%;
+    }
+}
+
+.section {
+
+    padding: @section-padding 0;
+
+    .section-slant(@deg) {
+        background: none !important;
+        &:extend(.section-slanted all);
+        &:before { transform: rotate(@deg); }
+    }
+
+    .section-color(@bg, @body, @body-alt) {
+        &:before { background: @bg; }
+        background: @bg;
+        color: @body;
+
+        h2 small, a {
+            color: @body-alt;
+        }
+    }
+
+    &.slant-up   { .section-slant(@section-slat);  }
+    &.slant-down { .section-slant(-@section-slat); }
+
+    &.white   { .section-color(#fff, #000, @brand-primary); }
+    &.primary { .section-color(@brand-primary, #fff, #000); }
+    &.dark    { .section-color(#000, #fff, @brand-primary); }
+}

@@ -3,7 +3,10 @@ html
     head
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-        link(rel='stylesheet', href='/css/style.css')
+
+        link(rel='stylesheet', href='/css/style.css', type='text/css')
+        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Karla:700,400|Libre+Baskerville:400,400italic', type='text/css')
+
         title Connor Peet - Full-Stack Web and Software Developer
 
     body
@@ -30,34 +33,35 @@ html
             p.focus I'm a web and software developer, developing for nine years (the last six professionally). I loving making logically beautiful and visually stunning things.
 
             .row
-                .col-sm-4: img(src="/img/profile.jpg", alt="Hi there!")
-                .col-sm-5
-                    h5 Bio
-                    p I was born in Maryland and raised a military brat, living in Japan, Florida, and Italy over the years. I'm currently attending the University of Toronto, and working hard to learn to speak Canadian (eh?).
-                    p Outside of mashing the keyboard, I enjoy swimming, bicycling, cooking, and travelling.
+                .col-sm-3.col-md-offset-1.col-xs-3: img.profile(src="/img/profile.jpg", alt="Hi there!")
+                .col-sm-8.col-xs-9.row
+                    .col-sm-8
+                        h5 Bio
+                        p I was born in Maryland and raised a military brat, living in Japan, Florida, and Italy over the years. I'm currently attending the University of Toronto, and working hard to learn to speak Canadian (eh?).
+                        p Outside of mashing the keyboard, I enjoy swimming, bicycling, cooking, and travelling.
 
-                    ul.social-mini
-                        li: a.icon.icon-email(href="mailto:connor@peet.io", alt="Email")
-                        li: a.icon.icon-twitter(href="https://twitter.com/ConnorPeet", alt="Twitter")
-                        li: a.icon.icon-skype(href="skype:connor4312", alt="Skype")
-                        li: a.icon.icon-linkedin(href="https://ca.linkedin.com/in/connorpeet", alt="LinkedIn")
-                        li: a.icon.icon-github(href="https://github.com/connor4312", alt="Github")
+                        ul.social-mini
+                            li: a.icon.icon-email(href="mailto:connor@peet.io", alt="Email")
+                            li: a.icon.icon-twitter(href="https://twitter.com/ConnorPeet", alt="Twitter")
+                            li: a.icon.icon-skype(href="skype:connor4312", alt="Skype")
+                            li: a.icon.icon-linkedin(href="https://ca.linkedin.com/in/connorpeet", alt="LinkedIn")
+                            li: a.icon.icon-github(href="https://github.com/connor4312", alt="Github")
 
-                .col-sm-3
-                    h5 Blog
-                    ul.blog-list
-                        li
-                            a(href="Lorem ipsum dollars")
-                            span Jul 7
-                        li
-                            a(href="Lorem ipsum dollars")
-                            span Jul 1
-                        li
-                            a(href="Lorem ipsum dollars")
-                            span Jun 25
-                        li
-                            a(href="Lorem ipsum dollars")
-                            span Jun 18
+                    .col-sm-4
+                        h5 Blog
+                        ul.blog-list
+                            li
+                                a(href="#") Lorem ipsum dolor sit amet.
+                                span Jul 7
+                            li
+                                a(href="#") Lorem ipsum dolor
+                                span Jul 1
+                            li
+                                a(href="#") Lorem ipsum dolor sit amet consectur.
+                                span Jun 25
+                            li
+                                a(href="#") Lorem ipsum dolor sit amet.
+                                span Jun 18
         .js-map
 
         a(name="#skills")
@@ -113,8 +117,20 @@ html
             a(name="#experience-ferrous-networks")
             .exp
                 h3 Director, #[small Ferrous Networks]
-                p Ferrous Networks was a startup game service provider founded by two friends and myself. As a small shop, I worked in all aspects of but business from marketing to customer support to server administration.  We also developed an incremental, hourly-rate billing system, which was an entirely new approach at the time in the industry. Before being acquired by a competitor, we had built the business up to serve thousands of active clients in six datacenters around the globe.
+                p.focus Ferrous Networks was a startup game service provider founded by two friends and myself. As a small shop, I worked in all aspects of but business from marketing to customer support to server administration.  We also developed an incremental, hourly-rate billing system, which was an entirely new approach at the time in the industry. Before being acquired by a competitor, we had built the business up to serve thousands of active clients in six datacenters around the globe.
 
-        .section.white.slant-up
+        .section.white.slant-up: .container
+            h2 Contac #[small Hi, how can I help you?]
+            p I'd love to talk to you. Feel free to shoot me a message, or connect on social media. I'll get back to you as fast as I can!
+
+            .col-sm-offset-1.col-sm-8
+
+            .col-sm-1
+                ul.social-full
+                    li: a.icon.icon-email(href="mailto:connor@peet.io", alt="Email") connor@peet.io
+                    li: a.icon.icon-twitter(href="https://twitter.com/ConnorPeet", alt="Twitter") @ConnorPeet
+                    li: a.icon.icon-skype(href="skype:connor4312", alt="Skype") connor4312
+                    li: a.icon.icon-linkedin(href="https://ca.linkedin.com/in/connorpeet", alt="LinkedIn") Connor Peet
+                    li: a.icon.icon-github(href="https://github.com/connor4312", alt="Github") connor4312
 
         footer Copyright 2015 Connor Peet. This site is #[a(href="https://github.com/connor4312/peet-io") open source], of course!

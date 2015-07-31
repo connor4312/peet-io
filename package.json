@@ -2,9 +2,9 @@
   "name": "peet-io",
   "version": "1.0.0",
   "description": "My personal peet.io site",
-  "main": "gulpfile.js",
+  "main": "index.js",
   "scripts": {
-    "test": "go test"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/connor4312/peet-io#readme",
   "private": true,
   "devDependencies": {
+    "bootstrap": "^3.3.5",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
@@ -30,5 +31,11 @@
     "gulp-minify-css": "^1.2.0",
     "gulp-uglify": "^1.2.0",
     "gulp-uncss": "^1.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "mysql": "^2.8.0",
+    "nodemailer": "^1.4.0"
   }
 }

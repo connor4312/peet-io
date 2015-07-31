@@ -1,0 +1,25 @@
+.blog-list {
+    li {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.25em;
+    }
+
+    span {
+        text-transform: uppercase;
+        text-align: right;
+        width: 50px;
+        color: #666;
+
+        @media (max-width: @screen-md-min) and (min-width: @screen-sm-min) {
+            display: none;
+        }
+    }
+
+    a {
+        flex-grow: 1;
+        flex-basis: 0px;
+    }
+}

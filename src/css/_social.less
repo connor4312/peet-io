@@ -1,0 +1,47 @@
+.social-mini, .social-full {
+    .icon {
+        display: inline-block;
+        width: 1em + @icon-social-padding * 2;
+        line-height: 1em + @icon-social-padding * 2;
+        text-align: center;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.social-item(@name, @color) {
+    .social-mini .icon-@{name} {
+        color: @color;
+
+        &:hover {
+            background: @color;
+            color: #fff;
+        }
+    }
+
+    .social-full .icon-@{name} {
+        background: @color;
+
+        &:hover {
+            background: @color;
+            color: #fff;
+        }
+    }
+}
+
+.social-item(~'email', #f44336);
+.social-item(~'skype', #00aff0);
+.social-item(~'twitter', #00a0d1);
+.social-item(~'linkedin', #0e76a8);
+.social-item(~'github', #000);
+
+.social-mini {
+    li {
+        margin-right: 0.5em;
+        list-style-type: none;
+        display: inline;
+    }
+}

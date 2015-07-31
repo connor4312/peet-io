@@ -27,13 +27,13 @@ gulp.task('js', function () {
 });
 
 gulp.task('images', function () {
-    return gulp.src('src/img/**')
+    return gulp.src('src/**/*.{png,jpg,jpeg,gif,svg}')
         .pipe($.if(minify, $.imagemin()))
-        .pipe(gulp.dest('dist/img'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('misc', function () {
-    return gulp.src([])
+    return gulp.src('src/**/*.{eot,ttf,woff}')
         .pipe(gulp.dest('dist'));
 });
 
