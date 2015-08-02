@@ -1,3 +1,5 @@
+include _mixins
+
 doctype html
 html
     head
@@ -40,13 +42,7 @@ html
                         p I was born in Maryland and raised a military brat, living in Japan, Florida, and Italy over the years. I'm currently attending the University of Toronto, and working hard to learn to speak Canadian (eh?).
                         p Outside of mashing the keyboard, I enjoy swimming, bicycling, cooking, and travelling.
 
-                        ul.social-mini
-                            li: a.icon.icon-email(href="mailto:connor@peet.io", alt="Email")
-                            li: a.icon.icon-twitter(href="https://twitter.com/ConnorPeet", alt="Twitter")
-                            li: a.icon.icon-skype(href="skype:connor4312", alt="Skype")
-                            li: a.icon.icon-linkedin(href="https://ca.linkedin.com/in/connorpeet", alt="LinkedIn")
-                            li: a.icon.icon-github(href="https://github.com/connor4312", alt="Github")
-
+                        ul.social-mini: +socialsList()
                     .col-sm-4
                         h5 Blog
                         ul.blog-list
@@ -70,19 +66,11 @@ html
             p.focus Part of my passion for development is driven by a love of learning &mdash; new tools, languages, and approaches to problems. As a result I've gained experience with a wide variety of technologies.
 
             .row
-                .col-sm-6: .skill
-                    span.skill-name JavaScript
-                    p I've been developing professionally in JavaScript for neigh on five years. I have proficiency with both frontend and backend JavaScript development. I've used JavaScript everything from #[a(href="#experience-mcph") large web applications] to #[a(href="https://github.com/MCProHosting/artisan-cassandra-orm") high-performance ORMs].
-                .col-sm-6: .skill
-                    span.skill-name Go
-                    p Go is a relatively recent addition to my arsenal. Since introducing it at Beam, we've  since used it to build scalable microservices as well as our core #[a(href="https://github.com/WatchBeam") streaming platform], which chomps through massive amounts of data per second.
+                .col-sm-6: +skill("JavaScript") I've been developing professionally in JavaScript for neigh on five years. I have proficiency with both frontend and backend JavaScript development. I've used JavaScript everything from #[a(href="#experience-mcph") large web applications] to #[a(href="https://github.com/MCProHosting/artisan-cassandra-orm") high-performance ORMs].
+                .col-sm-6: +skill("Go") Go is a relatively recent addition to my arsenal. Since introducing it at Beam, we've  since used it to build scalable microservices as well as our core #[a(href="https://github.com/WatchBeam") streaming platform], which chomps through massive amounts of data per second.
             .row
-                .col-sm-6: .skill
-                    span.skill-name PHP
-                    p PHP was my 'mother language', so to speak, and in the eight-odd years since my first #[code &lt;?php echo "Hello World"; ?&gt;] I've used it to build #[a(href="https://ready2frag.com") small websites] to #[a(href="#experience-mcph") e-commerce systems] that process thousands of transactions per day.
-                .col-sm-6: .skill
-                    span.skill-name Python
-                    p My experience with Python primarily revolves around web applications. I work with Python on a daily basis at #[a(href="#experience-rvs") Re Vera Services], and outside of that maintain an open source project or two.
+                .col-sm-6: +skill("PHP") PHP was my 'mother language', so to speak, and in the eight-odd years since my first #[code &lt;?php echo "Hello World"; ?&gt;] I've used it to build #[a(href="https://ready2frag.com") small websites] to #[a(href="#experience-mcph") e-commerce systems] that process thousands of transactions per day.
+                .col-sm-6: +skill("Python") My experience with Python primarily revolves around web applications. I work with Python on a daily basis at #[a(href="#experience-rvs") Re Vera Services], and outside of that maintain an open source project or two.
 
 
         a(name="#experience")
@@ -126,11 +114,6 @@ html
             .col-sm-offset-1.col-sm-8
 
             .col-sm-1
-                ul.social-full
-                    li: a.icon.icon-email(href="mailto:connor@peet.io", alt="Email") connor@peet.io
-                    li: a.icon.icon-twitter(href="https://twitter.com/ConnorPeet", alt="Twitter") @ConnorPeet
-                    li: a.icon.icon-skype(href="skype:connor4312", alt="Skype") connor4312
-                    li: a.icon.icon-linkedin(href="https://ca.linkedin.com/in/connorpeet", alt="LinkedIn") Connor Peet
-                    li: a.icon.icon-github(href="https://github.com/connor4312", alt="Github") connor4312
+                ul.social-full: +socialsList(true)
 
         footer Copyright 2015 Connor Peet. This site is #[a(href="https://github.com/connor4312/peet-io") open source], of course!

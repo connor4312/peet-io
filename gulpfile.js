@@ -5,7 +5,7 @@ var minify = false;
 
 
 gulp.task('html', function () {
-    return gulp.src('src/*.jade')
+    return gulp.src(['src/*.jade', '!src/_*.jade'])
         .pipe($.jade())
         .pipe($.if(minify, $.htmlmin()))
         .pipe(gulp.dest('dist'));
@@ -37,9 +37,9 @@ gulp.task('misc', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('minify', function () {
+gulp.task('setMinify', function () {
     minify = true;
 });
 
 gulp.task('default', [ 'html', 'css', 'js', 'images', 'misc' ]);
-gulp.task('minify', [ 'minify', 'default' ]);
+gulp.task('minify', [ 'setMinify', 'default' ]);

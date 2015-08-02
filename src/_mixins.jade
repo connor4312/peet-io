@@ -1,0 +1,39 @@
+-
+    var icons = [{
+        icon: 'email',
+        href: 'mailto:connor@peet.io',
+        text: 'connor@peet.io',
+        alt: 'Email'
+    }, {
+        icon: 'skype',
+        href: 'skype:connor4312',
+        text: 'connor4312',
+        alt: 'Skype'
+    }, {
+        icon: 'twitter',
+        href: 'https://twitter.com/ConnorPeet',
+        text: '@ConnorPeet',
+        alt: 'Twitter'
+    }, {
+        icon: 'linkedin',
+        href: 'https://ca.linkedin.com/in/connorpeet',
+        text: 'Connor Peet',
+        alt: 'LinkedIn'
+    }, {
+        icon: 'github',
+        href: 'https://github.com/connor4312',
+        text: 'connor4312',
+        alt: 'Github'
+    }]
+
+mixin skill(name)
+    .skill
+        .name: span= name
+        p.description
+            block
+
+mixin socialsList(showText)
+    each icon in icons
+        li: a(href=icon.href, alt=icon.alt, class="icon icon-#{icon.icon}")
+            if showText
+                span= icon.text
