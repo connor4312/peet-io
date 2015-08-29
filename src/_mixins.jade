@@ -37,3 +37,16 @@ mixin socialsList(showText)
         li: a(href=icon.href, alt=icon.alt, class="icon icon-#{icon.icon}")
             if showText
                 span= icon.text
+
+mixin experience(opts)
+    .exp.col-md-offset-1
+        .header
+            h3
+                =opts.position
+                small= opts.company
+            .timeline
+                .from= opts.from
+                .to= opts.to
+            .clearfix
+
+        block

@@ -1,6 +1,5 @@
 .section-slanted {
-    position: relative;
-    z-index: 0;
+    z-index: 1;
 
     &:before {
         content: "";
@@ -18,8 +17,9 @@
 }
 
 .section {
-
     padding: @section-padding 0;
+    position: relative;
+    z-index: 0;
 
     .section-slant(@deg) {
         background: none !important;
@@ -39,10 +39,26 @@
         h2 small:before {
             background: @body-alt;
         }
+
+        &.backdrop:before {
+            background: @bg;
+        }
     }
 
     &.slant-up   { .section-slant(@section-slat);  }
     &.slant-down { .section-slant(-@section-slat); }
+
+    &.backdrop:before {
+        @overage: 300px;
+
+        content: "";
+        position: absolute;
+        top: -@overage;
+        bottom: -@overage;
+        left: 0;
+        right: 0;
+        z-index: -1;
+    }
 
     &.white   { .section-color(#fff, #000, @brand-primary); }
     &.primary { .section-color(@brand-primary, #fff, #000); }

@@ -1,0 +1,43 @@
+.contact {
+
+    .control {
+        display: block;
+        width: 100%;
+        padding: (@form-control-font-size / 2) 15px;
+        font-size: @form-control-font-size;
+        background: @form-control-bg;
+        border: 0;
+        margin-bottom: @form-control-spacing;
+        line-height: 1.5em;
+        color: #555;
+
+        .placeholder(#ccc);
+
+        &:focus {
+            outline: 0;
+            color: #000;
+        }
+    }
+
+    .submit {
+        background: darken(@form-control-bg, 9%);
+        margin-top: @form-control-font-size * -2.5 - @form-control-spacing;
+        width: 33%;
+        float: right;
+
+        &:hover {
+            background: @brand-primary;
+            color: #fff;
+        }
+    }
+
+    textarea {
+        padding-bottom: @form-control-font-size + (@form-control-font-size / 2);
+        height: 200px;
+    }
+
+    &:focus {
+        outline: 0;
+        color: #000;
+    }
+}

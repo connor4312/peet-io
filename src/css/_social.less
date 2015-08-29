@@ -1,13 +1,53 @@
 .social-mini, .social-full {
+    li {
+        list-style-type: none;
+    }
+
     .icon {
-        display: inline-block;
-        width: 1em + @icon-social-padding * 2;
-        line-height: 1em + @icon-social-padding * 2;
-        text-align: center;
         text-decoration: none;
 
         &:hover {
             text-decoration: none;
+        }
+    }
+}
+
+.social-full {
+    @size: 50px;
+
+    .icon {
+        position: relative;;
+        color: #fff !important;
+        display: block;
+        width: @size;
+        height: @size;
+        line-height: @size;
+        white-space: nowrap;
+        transition: 0.3s;
+
+        &:before {
+            display: block;
+            font-size: @size / 2;
+            text-align: center;
+        }
+
+        span {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 100%;
+            max-width: 0px;
+            height: @size;
+            font-size: 20px;
+            margin-left: 0.4em;
+            transition: 0.3s;
+            overflow: hidden;
+            text-align: right;
+        }
+
+        &:hover span {
+            max-width: 300px;
+            padding: 0 0.5em 0 1em;
         }
     }
 }
@@ -23,11 +63,8 @@
     }
 
     .social-full .icon-@{name} {
-        background: @color;
-
-        &:hover {
+        &, span {
             background: @color;
-            color: #fff;
         }
     }
 }
@@ -41,7 +78,13 @@
 .social-mini {
     li {
         margin-right: 0.5em;
-        list-style-type: none;
         display: inline;
+    }
+
+    .icon {
+        display: inline-block;
+        width: 1em + @icon-social-padding * 2;
+        line-height: 1em + @icon-social-padding * 2;
+        text-align: center;
     }
 }

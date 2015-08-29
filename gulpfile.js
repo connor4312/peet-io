@@ -1,3 +1,6 @@
+
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 var gulp = require('gulp');
 var glob = require('glob');
 var $ = require('gulp-load-plugins')();
@@ -21,7 +24,15 @@ gulp.task('css', ['html'], function () {
 });
 
 gulp.task('js', function () {
-    return gulp.src('src/js/*.js')
+    var bundle = browserify({
+        insertGlobals: true,
+        debug: !minify
+    });
+
+    bundle.require('src/js/peet.js', { entry: true });
+
+    return bundle.bundle()
+        .pipe(source('peet.js'))
         .pipe($.if(minify, $.uglify()))
         .pipe(gulp.dest('dist/js'));
 });

@@ -13,7 +13,7 @@ var prod = process.env.NODE_ENV === 'production';
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 // Only enable static file serving in development. In production,
-// the should be served by nginx with try_files.
+// they should be served by nginx with try_files.
 if (!prod) {
     app.use(express.static(path.join(__dirname, '/dist')));
     app.get('/', function (req, res) {
