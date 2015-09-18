@@ -21,4 +21,20 @@ if (!prod) {
     });
 }
 
+app.post('/api/mail', function (req, res) {
+    mail.sendMail({
+        from: req.body.email,
+        to: config.smtp.to,
+        subject: 'New Website: ' + req.body.subject,
+        text: util.format('From: %s\n\nSubject: %s\n\nContent: %s\n',
+            req.body.email, req.body.subject, req.body.message)
+    }, function (err) {
+        if (err) {
+            handleErr(res, err);
+        } else {
+            res.json('Your message has been sent.');
+        }
+    });
+});
+
 app.listen(config.server.port, config.server.host);

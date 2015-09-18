@@ -27,8 +27,10 @@
 
         &:before {
             display: block;
-            font-size: @size / 2;
+            font-size: @size / 2 / (3 / 4);
             text-align: center;
+            transform: scale(3 / 4);
+            transition: 0.3s;
         }
 
         span {
@@ -45,9 +47,15 @@
             text-align: right;
         }
 
-        &:hover span {
-            max-width: 300px;
-            padding: 0 0.5em 0 1em;
+        &:hover {
+            &:before {
+                transform: scale(1);
+            }
+
+            span {
+                max-width: 300px;
+                padding: 0 0.5em 0 1em;
+            }
         }
     }
 }
