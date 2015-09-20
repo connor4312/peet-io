@@ -30,9 +30,10 @@ app.post('/api/mail', function (req, res) {
             req.body.email, req.body.subject, req.body.message)
     }, function (err) {
         if (err) {
-            handleErr(res, err);
+            console.error(err.stack);
+            res.end('There was an error sending your message,');
         } else {
-            res.json('Your message has been sent.');
+            res.end('Your message has been sent.');
         }
     });
 });

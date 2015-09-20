@@ -3,6 +3,7 @@
 @import '_contact.less';
 @import '_experience.less';
 @import '_fonts.less';
+@import '_intro.less';
 @import '_layout.less';
 @import '_section.less';
 @import '_skill.less';
@@ -16,10 +17,24 @@
 @page-border-color: #fff;
 
 @font-family-sans-serif:  'Karla', sans-serif;
-@font-family-serif:       'Libre Baskerville', serif;
+@font-family-monospace:   'Ubuntu Mono', serif;
+@font-family-serif:       @font-family-monospace;
+
+@navbar-default-color:             #aaa;
+@navbar-default-bg:                transparent;
+@navbar-default-border:            transparent;
+
+@navbar-default-link-color:                #aaa;
+@navbar-default-link-hover-color:          #000;
+@navbar-default-link-hover-bg:             #fff;
+
+@intro-border-size:   3px;
+@intro-arrow-size:    50px;
+@intro-arrow-width:   2px;
+@intro-arrow-spacing: 20px;
 
 @section-slat:    1.5deg;
-@section-padding: 100px;
+@section-padding: 150px;
 
 @header-tick-size:   1.5em;
 @header-tick-space:  1em;
@@ -31,10 +46,10 @@
 
 @skill-name-spacing: 50px;
 
-@tl-arrow-width: 50px;
+@tl-arrow-width:  50px;
 @tl-arrow-margin: 15px;
-@tl-arrow-head: 5px;
+@tl-arrow-head:   5px;
 
-@form-control-bg: #eee;
-@form-control-spacing: @grid-gutter-width;
+@form-control-bg:        #eee;
+@form-control-spacing:   @grid-gutter-width;
 @form-control-font-size: 20px;

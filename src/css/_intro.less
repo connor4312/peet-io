@@ -1,0 +1,124 @@
+.intro {
+    position: relative;
+    background: url('../img/intro.jpg') center center no-repeat;
+    background-size: cover;
+    z-index: 0;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background: url('../img/intro-pattern.png');
+    }
+
+    .card {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 0;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        width: 33%;
+        min-width: 300px;
+        z-index: 0;
+        overflow: hidden;
+        padding: 60px;
+
+        img {
+            @keyframes fadeIn {
+                0%   { opacity: 0; }
+                33%  { opacity: 0; }
+                100% { opacity: 1; }
+            }
+
+            position: relative;
+            z-index: 0;
+            width: 100%;
+            animation: fadeIn 3s linear;
+            opacity: 1;
+        }
+
+        &:before, &:after, .border:before, .border:after {
+            content: "";
+            position: absolute;
+            transition: 1s;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        &:before {
+            background: #fff;
+            transform: translateX(-100%);
+        }
+
+        .border {
+            @angle: atan(455 / 258); // image dimensions
+
+            @keyframes skewInX {
+                0%   { transform: skewX(@angle + 45deg); }
+                100% { transform: skewX(0deg); }
+            }
+
+            @keyframes skewInY {
+                0%   { transform: skewY(90deg - @angle + 45deg); }
+                100% { transform: skewY(0deg); }
+            }
+
+            &:before, &:after {
+                border: @intro-border-size solid #fff;
+            }
+
+            &:before {
+                border-top: none;
+                border-bottom: none;
+                animation: skewInY 3s linear;
+            }
+
+            &:after {
+                border-left: none;
+                border-right: none;
+                animation: skewInX 3s linear;
+            }
+        }
+
+        &:after {
+
+            left: 50%;
+            top: 50%;
+            margin: (@intro-arrow-size / -2) 0 0 ((@intro-arrow-size + @intro-arrow-spacing) / -2);
+            transform: rotate(45deg);
+            width: @intro-arrow-size;
+            height: @intro-arrow-size;
+            opacity: 0;
+            box-shadow: @intro-arrow-width -@intro-arrow-width 0 #000,
+                (@intro-arrow-spacing - @intro-arrow-width) -(@intro-arrow-spacing - @intro-arrow-width) 0 #fff,
+                @intro-arrow-spacing -@intro-arrow-spacing 0 #000;
+        }
+
+        &:hover {
+            &:before {
+                transform: translateX(0%);
+            }
+
+            &:after {
+                @keyframes fadeIn {
+                    0%   { opacity: 0; }
+                    40%  { opacity: 0; }
+                    100% { opacity: 1; }
+                }
+
+                animation: fadeIn 1s linear;
+                animation-fill-mode: forwards;
+                opacity: 1;
+            }
+        }
+    }
+}

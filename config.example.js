@@ -13,3 +13,7 @@ exports.smtp = {
     port: 2555,
     to: 'connor@peet.io'
 };
+
+exports.blog = [
+    { title: 'Write APIs You Want to Use', date: '18 Sept', link: 'https://medium.com/@ConnorPeet/write-apis-you-want-to-use-44fedb805823' },
+];

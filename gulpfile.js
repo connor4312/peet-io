@@ -1,4 +1,3 @@
-
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var gulp = require('gulp');
@@ -9,7 +8,7 @@ var minify = false;
 
 gulp.task('html', function () {
     return gulp.src(['src/*.jade', '!src/_*.jade'])
-        .pipe($.jade())
+        .pipe($.jade({ locals: require('./config') }))
         .pipe($.if(minify, $.htmlmin()))
         .pipe(gulp.dest('dist'));
 });

@@ -7,29 +7,29 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
 
         link(rel='stylesheet', href='/css/style.css', type='text/css')
-        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Karla:700,400|Libre+Baskerville:400,400italic', type='text/css')
+        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Karla:700,400|Ubuntu+Mono', type='text/css')
 
         title Connor Peet - Full-Stack Web and Software Developer
 
-    body
+    body: div(style="overflow:hidden")
         .page-border
+        .intro.screen-fill
+            nav.navbar.navbar-default
+                .container
+                    .navbar-header
+                        a.navbar-brand(href="#") Connor Peet
+                    ul.nav.navbar-nav.navbar-right
+                        li: a(href="#about") About
+                        li: a(href="#experience") Experience
+                        li: a(href="#contact") Contact
+                        li: a(href="/blog") Blog
 
-        nav.navbar
-            .container
-                .navbar-header
-                    a.navbar-brand(href="#") Connor Peet
-                ul.nav.navbar-nav.navbar-right
-                    li: a(href="#about") About
-                    li: a(href="#experience") Experience
-                    li: a(href="#contact") Contact
-                    li: a(href="/blog") Blog
-        .intro
-            h1 Hello World
-            p I'm a full-stack web and software developer. #[br] Let's build something #[i beautiful].
+            a.card(href="#about")
+                .border
+                img(src="/img/card.png", alt="Let's build something beautiful.")
 
-            a(href="#about")
 
-        a(name="about")
+        a#about(name="about")
         .section.white.slant-up: .container
             h2
                 | Me
@@ -48,22 +48,14 @@ html
                     .col-sm-4
                         h5 Blog
                         ul.blog-list
-                            li
-                                a(href="#") Lorem ipsum dolor sit amet.
-                                span Jul 7
-                            li
-                                a(href="#") Lorem ipsum dolor
-                                span Jul 1
-                            li
-                                a(href="#") Lorem ipsum dolor sit amet consectur.
-                                span Jun 25
-                            li
-                                a(href="#") Lorem ipsum dolor sit amet.
-                                span Jun 18
+                            for post in blog
+                                li
+                                    a(href="#{post.link}") #{post.title}
+                                    span #{post.date}
 
-        #js-map.map
+        #js-map.map.screen-fill(data-mod=0.6)
 
-        a(name="skills")
+        a#skills(name="skills")
         .section.primary.slant-down: .container
             h2 Skills #[small Including but not limited to...]
             p.focus Part of my passion for development is driven by a love of learning &mdash; new tools, languages, and approaches to problems. As a result I've gained experience with a wide variety of technologies.
@@ -76,7 +68,7 @@ html
                 .col-sm-6: +skill("Python") My experience with Python primarily revolves around web applications. I work with Python on a daily basis at #[a(href="#experience-rvs") Re Vera Services], and outside of that maintain an open source project or two.
 
 
-        a(name="experience")
+        a#experience(name="experience")
         .section.dark.backdrop: .container
             h2 Experience
 
@@ -108,6 +100,7 @@ html
             })
                 p Ferrous Networks was a startup game service provider founded by two friends and myself. As a small shop, I worked in all aspects of but business from marketing to customer support to server administration.  We also developed an incremental, hourly-rate billing system, which was an entirely new approach at the time in the industry. Before being acquired by a competitor, we had built the business up to serve thousands of active clients in six datacenters around the globe.
 
+        a#contact(name="contact")
         .section.white.slant-up: .container
             h2 Contact #[small Come in for a chat!]
             p.focus I'd love to talk to you. Feel free to shoot me a message, or connect on social media. I'll get back to you as fast as I can!
