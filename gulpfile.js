@@ -1,5 +1,6 @@
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
 var glob = require('glob');
 var $ = require('gulp-load-plugins')();
@@ -32,6 +33,7 @@ gulp.task('js', function () {
 
     return bundle.bundle()
         .pipe(source('peet.js'))
+        .pipe($.if(minify, buffer()))
         .pipe($.if(minify, $.uglify()))
         .pipe(gulp.dest('dist/js'));
 });
