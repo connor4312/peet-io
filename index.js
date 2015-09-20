@@ -1,12 +1,10 @@
 var express = require('express');
 var config = require('./config');
 var mailer = require('nodemailer');
-var mysql = require('mysql');
 var path = require('path');
 var util = require('util');
 
 var app = express();
-var sql = require('mysql').createPool(config.mysql);
 var mail = mailer.createTransport(config.smtp);
 var prod = process.env.NODE_ENV === 'production';
 
