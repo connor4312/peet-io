@@ -26,7 +26,7 @@ const Home: React.FC<IProps> = ({ projects, posts, work }) => {
               Hi, I'm Connor. I'm a software engineer working on{' '}
               <a href="https://code.visualstudio.com/">VS Code</a> at Microsoft. I build{' '}
               <Link href="/oss">neat things</Link> and{' '}
-              <Link href="/posts">sometimes write about them</Link>.
+              <Link href="/blog">sometimes write about them</Link>.
             </p>
             <ul className={styles.social}>
               <li>
