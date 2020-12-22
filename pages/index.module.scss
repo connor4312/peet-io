@@ -1,0 +1,32 @@
+@import '../styles/variables.scss';
+
+.intro {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 8em;
+    margin-right: 1em;
+  }
+
+  @include screen-max-sm {
+    display: block;
+
+    img {
+      margin: 0 0 1em;
+    }
+  }
+}
+
+
+.social {
+  margin-top: 1em;
+  font-size: 0.7em;
+
+  li {
+    display: inline;
+    list-style-type: none;
+    margin-right: 1em;
+  }
+}

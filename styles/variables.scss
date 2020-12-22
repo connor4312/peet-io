@@ -1,0 +1,72 @@
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+
+@mixin screen-min-sm {
+  @media (min-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin screen-max-sm {
+  @media (max-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin screen-min-md {
+  @media (min-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin screen-max-md {
+  @media (max-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin screen-min-lg {
+  @media (min-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin screen-max-lg {
+  @media (max-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin screen-min-xl {
+  @media (min-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+@mixin screen-max-xl {
+  @media (max-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+@mixin invert-text {
+  text-decoration: none;
+  color: var(--color-background);
+  background: var(--color-contrast);
+}
+
+@mixin link-like {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    @include invert-text();
+  }
+}

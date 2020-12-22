@@ -1,0 +1,35 @@
+@import '../styles/variables';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem -1rem;
+
+  > * {
+    width: 50%;
+
+    @include screen-max-sm {
+      width: 100%;
+    }
+  }
+}
+
+.card {
+  padding: 1rem;
+  text-decoration: none;
+
+  strong {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+  }
+
+  p {
+    text-decoration: none;
+    font-size: 0.8em;
+    margin: 0.5em 0 0;
+  }
+
+  &:hover strong {
+    text-decoration: none;
+  }
+}

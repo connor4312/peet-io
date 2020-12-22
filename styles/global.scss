@@ -1,0 +1,62 @@
+@import './variables';
+
+:root {
+  --font-family-heading: 'MODE7GX0', sans-serif;
+  --font-family-body: sans-serif;
+  --color-contrast: #000;
+  --color-background: #fff;
+  --mobile-screen: 768px;
+}
+
+.theme-dark {
+  --color-contrast: #fff;
+  --color-background: #222;
+}
+
+@font-face {
+  font-family: 'MODE7GX0';
+  src: url('./MODE7GX0.woff2') format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-body);
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.global-container {
+  color: var(--color-contrast);
+  background: var(--color-background);
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+}
+
+a {
+  color: currentColor;
+  @include link-like();
+}
+
+.long-form {
+  p {
+    margin-bottom: 1em;
+    text-align: justify;
+
+    @include screen-max-md {
+      text-align: left;
+    }
+  }
+}

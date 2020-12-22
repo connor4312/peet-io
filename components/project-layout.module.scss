@@ -1,0 +1,19 @@
+.meta {
+  font-size: 0.8em;
+  margin-bottom: 2rem;
+
+  > span {
+    margin-right: 2rem;
+  }
+
+  .lang {
+    display: inline-flex;
+    align-items: center;
+
+    > span {
+      width: 0.5em;
+      height: 0.5em;
+      margin-right: 0.3em;
+    }
+  }
+}

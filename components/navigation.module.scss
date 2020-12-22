@@ -1,0 +1,85 @@
+@import '../styles/variables';
+
+$link-padding: 1rem;
+
+.nav {
+  font-family: var(--font-family-heading);
+  width: 100%;
+  margin-bottom: 3rem;
+
+  ul {
+    display: flex;
+    align-items: center;
+
+    @include screen-max-sm {
+      display: block;
+    }
+  }
+
+  li {
+    list-style-type: none;
+
+    &:first-child > * {
+      padding-left: 0;
+    }
+  }
+
+  a,
+  button {
+    padding: $link-padding;
+    display: block;
+    @include link-like();
+
+    @include screen-max-sm {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.darkToggle {
+  background: none;
+  border: 0;
+  outline: 0 !important;
+  color: var(--color-contrast);
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.name {
+  position: relative;
+  line-height: 1;
+  background: none !important;
+
+  span {
+    display: inline-block;
+    transition: transform 100ms;
+    padding: 0.2em 0.2em 0.1em;
+  }
+
+  span:first-child {
+    position: absolute;
+    top: $link-padding;
+    left: 0;
+    transform-origin: 0 0;
+  }
+
+  span:last-child {
+    transform: scaleY(0);
+    transform-origin: 0 100%;
+    background: var(--color-contrast);
+    color: var(--color-background);
+  }
+
+  &:hover,
+  &:focus,
+  &.active {
+    span:first-child {
+      transform: scaleY(0);
+    }
+
+    span:last-child {
+      transform: scaleY(1);
+    }
+  }
+}
