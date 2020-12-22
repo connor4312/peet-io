@@ -24,6 +24,8 @@ addEventListener('fetch', (event) => {
   }
 });
 
+const CACHE_DURATION = 2 * 60 * 60 * 24;
+
 async function handleEvent(event) {
   let options = {};
 
@@ -35,7 +37,6 @@ async function handleEvent(event) {
     const defaultAssetKey = mapRequestToAsset(request);
     const url = new URL(defaultAssetKey.url);
     url.pathname = url.pathname.replace(/^(\/.+)\/index\.html/, '$1.html');
-    console.log('a', url)
 
     return new Request(url.toString(), defaultAssetKey);
   };
@@ -45,6 +46,11 @@ async function handleEvent(event) {
       // customize caching
       options.cacheControl = {
         bypassCache: true,
+      };
+    } else {
+      options.cacheControl = {
+        browserTTL: CACHE_DURATION,
+        edgeTTL: CACHE_DURATION,
       };
     }
     return await getAssetFromKV(event, options);
