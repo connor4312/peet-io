@@ -33,7 +33,7 @@ const Home: React.FC<IProps> = ({ projects, posts, work }) => {
                 <a href="https://git.io/8">Github</a>
               </li>
               <li>
-                <a href="https://twitter.com">Twitter</a>
+                <a href="https://twitter.com/ConnorPeet">Twitter</a>
               </li>
               <li>
                 <a href="https://www.linkedin.com/in/connorpeet/">Linkedin</a>
