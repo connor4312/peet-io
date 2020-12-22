@@ -1,0 +1,10 @@
+name = "personal"
+type = "webpack"
+account_id = "e89bb89635592949a6d6fe605a43cdca"
+workers_dev = false
+route = "peet.io/*"
+zone_id = "c9c0158b5b54b804abc1669a300c0f2f"
+
+[site]
+bucket = "./out"
+entry-point = "workers-site"
