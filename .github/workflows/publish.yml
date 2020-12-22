@@ -9,5 +9,7 @@ jobs:
       - run: 'npm run static'
       - name: wrangler publish
         uses: cloudflare/wrangler-action@1.2.0
+        env:
+          USER: root
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
