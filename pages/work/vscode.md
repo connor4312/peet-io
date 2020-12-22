@@ -1,6 +1,6 @@
 ---
 name: VS Code
-toYear: 2019
+fromYear: 2019
 ---
 
 [VS Code](https://code.visualstudio.com/) is the [most popular](https://insights.stackoverflow.com/survey/2019#development-environments-and-tools) development environment. Following my work on [Mixer](/work/mixer), I realized that what I enjoyed my time most when I was building tools for developers. Also, after being on a 100-odd person engineering team, I realized I wanted to return to a smaller, more nimble team.

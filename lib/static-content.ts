@@ -195,6 +195,8 @@ export const projects = new ProjectContentProvider('oss');
 export interface IWork {
   id: string;
   name: string;
+  next: { id: string; name: string } | null;
+  prev: { id: string; name: string } | null;
   fromYear: number;
   toYear?: number;
 }
@@ -202,6 +204,8 @@ export interface IWork {
 export interface IWorkWithContent extends IWork {
   content: string;
 }
+
+const toWorkRef = (work: IWork | undefined) => (work ? { id: work.id, name: work.name } : null);
 
 class WorkContentProvider extends StaticContentProvider<IWork, IWorkWithContent> {
   public async provideSummaries() {
@@ -214,14 +218,22 @@ class WorkContentProvider extends StaticContentProvider<IWork, IWorkWithContent>
         } as IWork),
     );
 
-    return summaries.sort((a, b) => b.fromYear - a.fromYear);
+    summaries.sort((a, b) => (b.toYear || Infinity) - (a.toYear || Infinity));
+
+    for (let i = 0; i < summaries.length; i++) {
+      summaries[i].prev = toWorkRef(summaries[i + 1]);
+      summaries[i].next = toWorkRef(summaries[i - 1]);
+    }
+
+    return summaries;
   }
 
   public async provideFullData(id: string) {
     const frontmatter = await this.getFrontmatter(id);
     const processedContent = await remark().use(html).process(frontmatter.content);
     const content = processedContent.toString();
-    return { id, content, ...frontmatter.data } as IWorkWithContent;
+    const summary = (await this.provideSummaries()).find((w) => w.id === id);
+    return { content, ...summary } as IWorkWithContent;
   }
 }
 

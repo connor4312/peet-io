@@ -1,5 +1,5 @@
 ---
-name: etcd
+name: etcd3
 summary: Node.js client library for etcd.
 ghOwner: microsoft
 lang: [TypeScript]

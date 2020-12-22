@@ -1,0 +1,13 @@
+.more {
+  display: flex;
+  font-family: var(--font-family-heading);
+
+  > a {
+    flex-grow: 1;
+    text-decoration: none;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+}

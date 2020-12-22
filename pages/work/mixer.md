@@ -4,7 +4,7 @@ fromYear: 2014
 toYear: 2019
 ---
 
-[Mixer](https://en.wikipedia.org/wiki/Mixer_(service)) was a live video streaming startup born out, and funded by, MCProHosting. I was the first engineering hire at MCPH, and after spending early 2014 revamping its platform, we were looking for something new. We started working Mixer--called Beam, at the time--in the fall of 2014, and released public alpha shortly thereafter.
+[Mixer](<https://en.wikipedia.org/wiki/Mixer_(service)>) was a live video streaming startup born out, and funded by, [MCProHosting](/work/mcph). I was the first engineering hire at MCPH, and after spending early 2014 revamping its platform, we were looking for something new. We started working Mixer--called Beam, at the time--in the fall of 2014, and released public alpha shortly thereafter.
 
 (Fun fact--in spite of the Wikipedia article saying we officially launched in 2016, that was just the last of multiple "launches" of the platform. If your startup doesn't launch the first time, try again!)
 
