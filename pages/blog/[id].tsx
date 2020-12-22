@@ -1,9 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
-import { Date } from '../../components/date';
+import { Container } from '../../components/container';
+import { DisplayDate } from '../../components/date';
 import Layout from '../../components/layout';
 import { IPostWithContent, posts } from '../../lib/static-content';
-import utilStyles from '../../styles/utils.module.css';
 
 interface IProps {
   postData: IPostWithContent;
@@ -11,17 +10,19 @@ interface IProps {
 
 export default function Post({ postData }: IProps) {
   return (
-    <Layout>
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
-      <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
-          <Date dateString={postData.date} />
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
+    <Layout title={postData.title}>
+      <Container>
+        <article className="long-form">
+          <h1>
+            {postData.title}
+            <small style={{ display: 'block' }}>
+              <DisplayDate dateString={postData.date} />
+            </small>
+          </h1>
+
+          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        </article>
+      </Container>
     </Layout>
   );
 }

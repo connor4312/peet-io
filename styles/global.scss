@@ -59,4 +59,60 @@ a {
       text-align: left;
     }
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 3em 0 1em;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol {
+    line-height: 1.5rem;
+
+    + blockquote,
+    + ul,
+    + ol,
+    + p {
+      margin-top: 1rem;
+    }
+  }
+
+  ul,
+  ol {
+    margin: 0 2rem;
+  }
+
+  li {
+    margin: 0.5em 0;
+  }
+
+  hr {
+    height: 1px;
+    border: none;
+    color: #ccc;
+    background-color: #ccc;
+    margin: 2em 0;
+  }
+
+  blockquote {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-left: 2px solid #ccc;
+  }
+
+  dt {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  dd {
+    margin-bottom: 2rem;
+  }
 }

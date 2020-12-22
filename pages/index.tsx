@@ -3,15 +3,19 @@ import Link from 'next/link';
 import { Container } from '../components/container';
 import Layout from '../components/layout';
 import { More } from '../components/more';
+import { PostList } from '../components/post-list';
 import { ProjectList } from '../components/project-list';
-import { IProject, projects } from '../lib/static-content';
+import { IPost, IProject, IWork, posts, projects, work } from '../lib/static-content';
+import { classes } from '../lib/ui';
 import styles from './index.module.scss';
 
 interface IProps {
   projects: IProject[];
+  posts: IPost[];
+  work: IWork[];
 }
 
-const Home: React.FC<IProps> = ({ projects }) => {
+const Home: React.FC<IProps> = ({ projects, posts, work }) => {
   return (
     <Layout>
       <Container>
@@ -37,9 +41,26 @@ const Home: React.FC<IProps> = ({ projects }) => {
             </ul>
           </div>
         </div>
-        <h1 style={{ marginTop: '3rem' }}>Projects</h1>
-        <ProjectList projects={projects.slice(0, 6)} />
-        <More href="/oss" />
+        <div className={classes('long-form', styles.content)}>
+          <h1>Work</h1>
+          <ul>
+            {work.map((w) => (
+              <li key={w.id}>
+                <Link href={`/work/${w.id}`}>
+                  <a>{w.name}</a>
+                </Link>{' '}
+                {w.fromYear} - {w.toYear || 'Present'}
+              </li>
+            ))}
+          </ul>
+          <h1>Projects</h1>
+          <ProjectList projects={projects.slice(0, 6)} />
+          <More href="/oss" />
+
+          <h1>Recent Posts</h1>
+          <PostList posts={posts.slice(0, 3)} more={false} />
+          <More href="/blog" />
+        </div>
       </Container>
     </Layout>
   );
@@ -50,5 +71,7 @@ export default Home;
 export const getStaticProps: GetStaticProps<IProps> = async () => ({
   props: {
     projects: await projects.provideSummaries(),
+    posts: await posts.provideSummaries(),
+    work: await work.provideSummaries(),
   },
 });

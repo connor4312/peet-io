@@ -3,6 +3,7 @@ import { languageColors } from '../lib/language-colors';
 import { IProject } from '../lib/static-content';
 import { Container } from './container';
 import Layout from './layout';
+import { More } from './more';
 import styles from './project-layout.module.scss';
 
 export const ProjectLayout: React.FC<{ project: IProject; repo: Repository }> = ({
@@ -27,6 +28,7 @@ export const ProjectLayout: React.FC<{ project: IProject; repo: Repository }> = 
         ))}
       </div>
       {children}
+      <More href={repo.data.html_url} text="View on Github" />
     </Container>
   </Layout>
 );

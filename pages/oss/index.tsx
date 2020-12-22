@@ -9,17 +9,16 @@ interface IProps {
   projects: IProject[];
 }
 
-const Projects: React.FC<IProps> = ({ projects }) => {
-  return (
-    <Layout>
-      <Container>
-        <h1>OSS</h1>
-        A selection open source projects which I think are useful or interesting. In no particular order.
-        <ProjectList projects={projects} />
-      </Container>
-    </Layout>
-  );
-};
+const Projects: React.FC<IProps> = ({ projects }) => (
+  <Layout>
+    <Container>
+      <h1>OSS</h1>
+      A selection open source projects which I think are useful or interesting. In no particular
+      order.
+      <ProjectList projects={projects} />
+    </Container>
+  </Layout>
+);
 
 export default Projects;
 

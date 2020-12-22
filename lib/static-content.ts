@@ -50,10 +50,10 @@ abstract class StaticContentProvider<TSummarized extends { id: string }, TFull> 
     const files = await this.getAllFiles();
     return await Promise.all(
       files.map(
-        async (file): Promise<IFileWithFrontMatter> => {
-          const fileContents = await fs.readFile(file.path, 'utf8');
-          return { file, frontmatter: matter(fileContents) };
-        },
+        async (file): Promise<IFileWithFrontMatter> => ({
+          file,
+          frontmatter: await this.getFrontmatter(file.name),
+        }),
       ),
     );
   });
@@ -73,40 +73,67 @@ abstract class StaticContentProvider<TSummarized extends { id: string }, TFull> 
         }),
       );
   });
+
+  /**
+   * Gets frontmatter for a specific file.
+   */
+  protected async getFrontmatter(file: string) {
+    if (!file.endsWith(mdExtension)) {
+      file += mdExtension;
+    }
+
+    const fullPath = path.join(this.directory, file);
+    const fileContents = await fs.readFile(fullPath, 'utf8');
+    const frontmatter = matter(fileContents);
+    return frontmatter;
+  }
 }
 
 export interface IPost {
   id: string;
   date: string;
   title: string;
+  firstParagraph: string;
 }
 
 export interface IPostWithContent extends IPost {
   contentHtml: string;
 }
 
-class PostContentProvider extends StaticContentProvider<IPost, IPostWithContent> {
+class BlogContentProvider extends StaticContentProvider<IPost, IPostWithContent> {
   public async provideSummaries() {
     const files = await this.getAllFrontmatter();
-    const summaries = files.map(
-      ({ file, frontmatter }) => ({ id: file.noext, ...frontmatter.data } as IPost),
+    const summaries = await Promise.all(
+      files.map(async ({ file, frontmatter }) => {
+        const firstParagraph = await remark()
+          .use(() => (root: any) => {
+            root.children = root.children
+              .filter((c: { type: string }) => c.type === 'paragraph')
+              .slice(0, 1);
+          })
+          .use(html)
+          .process(frontmatter.content);
+
+        return {
+          id: file.noext,
+          firstParagraph: firstParagraph.toString(),
+          ...frontmatter.data,
+        } as IPost;
+      }),
     );
 
     return summaries.sort((a, b) => (a.date < b.date ? 1 : -1));
   }
 
   public async provideFullData(id: string) {
-    const fullPath = path.join(this.directory, `${id}.md`);
-    const fileContents = await fs.readFile(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
-
-    const processedContent = await remark().use(html).process(matterResult.content);
+    const frontmatter = await this.getFrontmatter(id);
+    const processedContent = await remark().use(html).process(frontmatter.content);
     const contentHtml = processedContent.toString();
-    return { id, contentHtml, ...matterResult.data } as IPostWithContent;
+    return { id, contentHtml, ...frontmatter.data } as IPostWithContent;
   }
 }
 
-export const posts = new PostContentProvider('posts');
+export const posts = new BlogContentProvider('blog');
 
 export interface IProject {
   name: string;
@@ -136,9 +163,7 @@ class ProjectContentProvider extends StaticContentProvider<IProject, IProjectWit
   }
 
   public async provideFullData(id: string) {
-    const fullPath = path.join(this.directory, `${id}.md`);
-    const fileContents = await fs.readFile(fullPath, 'utf8');
-    const frontmatter = matter(fileContents);
+    const frontmatter = await this.getFrontmatter(id);
     const project = this.resolveProjectFromFrontmatter(id, frontmatter);
 
     const processedContent = await remark().use(html).process(frontmatter.content);
@@ -166,3 +191,38 @@ class ProjectContentProvider extends StaticContentProvider<IProject, IProjectWit
 }
 
 export const projects = new ProjectContentProvider('oss');
+
+export interface IWork {
+  id: string;
+  name: string;
+  fromYear: number;
+  toYear?: number;
+}
+
+export interface IWorkWithContent extends IWork {
+  content: string;
+}
+
+class WorkContentProvider extends StaticContentProvider<IWork, IWorkWithContent> {
+  public async provideSummaries() {
+    const files = await this.getAllFrontmatter();
+    const summaries = files.map(
+      ({ file, frontmatter }) =>
+        ({
+          id: file.noext,
+          ...frontmatter.data,
+        } as IWork),
+    );
+
+    return summaries.sort((a, b) => b.fromYear - a.fromYear);
+  }
+
+  public async provideFullData(id: string) {
+    const frontmatter = await this.getFrontmatter(id);
+    const processedContent = await remark().use(html).process(frontmatter.content);
+    const content = processedContent.toString();
+    return { id, content, ...frontmatter.data } as IWorkWithContent;
+  }
+}
+
+export const work = new WorkContentProvider('work');

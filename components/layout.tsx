@@ -11,7 +11,7 @@ const Layout: React.FC<{ title?: string }> = ({ children, title }) => (
       <title>{title ? `${title} - ${name}` : name}</title>
     </Head>
     <Navigation />
-    <main>{children}</main>
+    <main style={{ marginBottom: '5rem'}}>{children}</main>
   </>
 );
 
