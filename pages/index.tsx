@@ -30,7 +30,7 @@ const Home: React.FC<IProps> = ({ projects, posts, work }) => {
             </p>
             <ul className={styles.social}>
               <li>
-                <a href="https://git.io/8">Github</a>
+                <a href="https://git.io/8">GitHub</a>
               </li>
               <li>
                 <a href="https://twitter.com/ConnorPeet">Twitter</a>

@@ -28,7 +28,7 @@ export const ProjectLayout: React.FC<{ project: IProject; repo: Repository }> = 
         ))}
       </div>
       {children}
-      <More href={repo.data.html_url} text="View on Github" />
+      <More href={repo.data.html_url} text="View on GitHub" />
     </Container>
   </Layout>
 );
