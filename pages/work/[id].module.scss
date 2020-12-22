@@ -1,12 +1,13 @@
 .more {
   display: flex;
   font-family: var(--font-family-heading);
+  margin-top: 3rem;
 
   > a {
     flex-grow: 1;
     text-decoration: none;
 
-    &:last-child {
+    &:nth-child(2) {
       text-align: right;
     }
   }
