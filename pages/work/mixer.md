@@ -15,7 +15,7 @@ By 2019, Mixer had grown from five to around a hundred engineers, with hundreds 
 Notably interesting things I built during my time at Mixer include:
 
 - The (original) low latency video ingest server, which was used for the lifetime of the product;
-- The realtime event system system that broadcasted millions of events/second to users on the site--one day I'll write about it;
+- The realtime event system that broadcasted millions of events/second to users on the site--one day I'll write about it;
 - The [MixPlay](https://techcrunch.com/2018/05/24/microsofts-twitch-rival-mixer-gets-a-revamp-including-new-developer-tools-for-interactive-gameplay/) game development platform;
 - Lots of CRUD APIs and web UI, of course.
 
