@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Container } from '../../components/container';
 import { DisplayDate } from '../../components/date';
 import Layout from '../../components/layout';
@@ -13,6 +14,15 @@ export default function Post({ postData }: IProps) {
     <Layout title={postData.title}>
       <Container>
         <article className="long-form">
+          <Head>
+            {postData.scripts?.map((attrs, i) => (
+              <script
+                type="text/html"
+                key={i}
+                {...(typeof attrs === 'string' ? { src: attrs } : attrs)}
+              />
+            ))}
+          </Head>
           <h1>
             {postData.title}
             <small style={{ display: 'block' }}>

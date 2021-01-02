@@ -94,6 +94,7 @@ export interface IPost {
   date: string;
   title: string;
   firstParagraph: string;
+  scripts?: ReadonlyArray<string | Record<string, string>>;
 }
 
 export interface IPostWithContent extends IPost {
