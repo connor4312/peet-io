@@ -9,9 +9,15 @@ const Layout: React.FC<{ title?: string }> = ({ children, title }) => (
       <meta name="description" content="Learn how to build a personal website using Next.js" />
       <meta name="twitter:card" content="summary_large_image" />
       <title>{title ? `${title} - ${name}` : name}</title>
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        href="https://peet.io/blog.rss"
+        title="RSS Feed"
+      />
     </Head>
     <Navigation />
-    <main style={{ marginBottom: '5rem'}}>{children}</main>
+    <main style={{ marginBottom: '5rem' }}>{children}</main>
   </>
 );
 

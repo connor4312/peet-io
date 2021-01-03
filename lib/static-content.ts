@@ -94,6 +94,7 @@ export interface IPost {
   date: string;
   title: string;
   firstParagraph: string;
+  imageUrl?: string;
   scripts?: ReadonlyArray<string | Record<string, string>>;
 }
 
@@ -101,26 +102,35 @@ export interface IPostWithContent extends IPost {
   contentHtml: string;
 }
 
+interface IMarkdownNode {
+  type: string;
+  children?: IMarkdownNode[];
+  url?: string;
+}
+
+const getFirstMd = (
+  node: IMarkdownNode,
+  filter: (n: IMarkdownNode) => boolean,
+): IMarkdownNode | undefined => {
+  if (filter(node)) {
+    return node;
+  }
+
+  for (const child of node.children ?? []) {
+    const r = getFirstMd(child, filter);
+    if (r) {
+      return r;
+    }
+  }
+
+  return undefined;
+};
+
 class BlogContentProvider extends StaticContentProvider<IPost, IPostWithContent> {
   public async provideSummaries() {
     const files = await this.getAllFrontmatter();
     const summaries = await Promise.all(
-      files.map(async ({ file, frontmatter }) => {
-        const firstParagraph = await remark()
-          .use(() => (root: any) => {
-            root.children = root.children
-              .filter((c: { type: string }) => c.type === 'paragraph')
-              .slice(0, 1);
-          })
-          .use(html)
-          .process(frontmatter.content);
-
-        return {
-          id: file.noext,
-          firstParagraph: firstParagraph.toString(),
-          ...frontmatter.data,
-        } as IPost;
-      }),
+      files.map(async ({ file, frontmatter }) => this.getPost(file.noext, frontmatter)),
     );
 
     return summaries.sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -130,7 +140,33 @@ class BlogContentProvider extends StaticContentProvider<IPost, IPostWithContent>
     const frontmatter = await this.getFrontmatter(id);
     const processedContent = await remark().use(html).process(frontmatter.content);
     const contentHtml = processedContent.toString();
-    return { id, contentHtml, ...frontmatter.data } as IPostWithContent;
+    return { ...(await this.getPost(id, frontmatter)), contentHtml };
+  }
+
+  private async getPost(id: string, frontmatter: matter.GrayMatterFile<string>) {
+    const firstParagraph = await remark()
+      .use(() => (root: any) => {
+        const node = getFirstMd(root, (n) => n.type === 'paragraph');
+        root.children = node ? [node] : [];
+      })
+      .use(html)
+      .process(frontmatter.content);
+
+    let imageUrl: string | undefined;
+    await remark()
+      .use(() => (root: any) => {
+        const node = getFirstMd(root, (n) => n.type === 'image');
+        console.log(node?.url);
+        imageUrl = node?.url;
+      })
+      .process(frontmatter.content);
+
+    return {
+      id,
+      firstParagraph: firstParagraph.toString(),
+      imageUrl,
+      ...frontmatter.data,
+    } as IPost;
   }
 }
 

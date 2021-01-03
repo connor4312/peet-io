@@ -22,6 +22,11 @@ export default function Post({ postData }: IProps) {
                 {...(typeof attrs === 'string' ? { src: attrs } : attrs)}
               />
             ))}
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@ConnorPeet" />
+            <meta name="twitter:title" content={postData.title} />
+            <meta name="twitter:description" content={postData.firstParagraph} />
+            {postData.imageUrl && <meta name="twitter:image" content={postData.imageUrl} />}
           </Head>
           <h1>
             {postData.title}

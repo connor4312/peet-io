@@ -5,6 +5,7 @@ import Layout from '../components/layout';
 import { More } from '../components/more';
 import { PostList } from '../components/post-list';
 import { ProjectList } from '../components/project-list';
+import { build } from '../lib/build';
 import { IPost, IProject, IWork, posts, projects, work } from '../lib/static-content';
 import { classes } from '../lib/ui';
 import styles from './index.module.scss';
@@ -68,10 +69,16 @@ const Home: React.FC<IProps> = ({ projects, posts, work }) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps<IProps> = async () => ({
-  props: {
-    projects: await projects.provideSummaries(),
-    posts: await posts.provideSummaries(),
-    work: await work.provideSummaries(),
-  },
-});
+export const getStaticProps: GetStaticProps<IProps> = async () => {
+  // use this to run our build scripts... this is a bit of a hack, but next.js
+  // doesn't seem to have a better way to run typescript scripts at build time.
+  await build();
+
+  return {
+    props: {
+      projects: await projects.provideSummaries(),
+      posts: await posts.provideSummaries(),
+      work: await work.provideSummaries(),
+    },
+  };
+};

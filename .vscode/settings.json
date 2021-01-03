@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    "**/.next": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
+}
