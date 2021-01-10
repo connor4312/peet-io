@@ -1,10 +1,9 @@
 import { promises as fs } from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-import remark from 'remark';
-import html from 'remark-html';
 import { getProjectRepo, Repository } from './get-repo';
 import { languageColors } from './language-colors';
+import { getFirstMd, makeProcessor } from './md-engine';
 import { once } from './ui';
 
 const mdExtension = '.md';
@@ -94,38 +93,13 @@ export interface IPost {
   date: string;
   title: string;
   firstParagraph: string;
-  imageUrl?: string;
+  imageUrl: string | null;
   scripts?: ReadonlyArray<string | Record<string, string>>;
 }
 
 export interface IPostWithContent extends IPost {
   contentHtml: string;
 }
-
-interface IMarkdownNode {
-  type: string;
-  children?: IMarkdownNode[];
-  url?: string;
-}
-
-const getFirstMd = (
-  node: IMarkdownNode,
-  filter: (n: IMarkdownNode) => boolean,
-): IMarkdownNode | undefined => {
-  if (filter(node)) {
-    return node;
-  }
-
-  for (const child of node.children ?? []) {
-    const r = getFirstMd(child, filter);
-    if (r) {
-      return r;
-    }
-  }
-
-  return undefined;
-};
-
 class BlogContentProvider extends StaticContentProvider<IPost, IPostWithContent> {
   public async provideSummaries() {
     const files = await this.getAllFrontmatter();
@@ -138,26 +112,25 @@ class BlogContentProvider extends StaticContentProvider<IPost, IPostWithContent>
 
   public async provideFullData(id: string) {
     const frontmatter = await this.getFrontmatter(id);
-    const processedContent = await remark().use(html).process(frontmatter.content);
+    const processedContent = await makeProcessor().process(frontmatter.content);
     const contentHtml = processedContent.toString();
     return { ...(await this.getPost(id, frontmatter)), contentHtml };
   }
 
   private async getPost(id: string, frontmatter: matter.GrayMatterFile<string>) {
-    const firstParagraph = await remark()
-      .use(() => (root: any) => {
-        const node = getFirstMd(root, (n) => n.type === 'paragraph');
+    const firstParagraph = await makeProcessor()
+      .use(() => (root) => {
+        const node = getFirstMd(root, (n) => n.tagName === 'p');
         root.children = node ? [node] : [];
+        console.log(JSON.stringify(root.children, null, 2));
       })
-      .use(html)
       .process(frontmatter.content);
 
-    let imageUrl: string | undefined;
-    await remark()
+    let imageUrl: string | null = null;
+    await makeProcessor()
       .use(() => (root: any) => {
-        const node = getFirstMd(root, (n) => n.type === 'image');
-        console.log(node?.url);
-        imageUrl = node?.url;
+        const node = getFirstMd(root, (n) => n.tagName === 'img');
+        imageUrl = (node?.properties as { [key: string]: string })?.src ?? null;
       })
       .process(frontmatter.content);
 
@@ -203,7 +176,7 @@ class ProjectContentProvider extends StaticContentProvider<IProject, IProjectWit
     const frontmatter = await this.getFrontmatter(id);
     const project = this.resolveProjectFromFrontmatter(id, frontmatter);
 
-    const processedContent = await remark().use(html).process(frontmatter.content);
+    const processedContent = await makeProcessor().process(frontmatter.content);
     return {
       content: processedContent.toString(),
       repo: await getProjectRepo(project),
@@ -267,7 +240,7 @@ class WorkContentProvider extends StaticContentProvider<IWork, IWorkWithContent>
 
   public async provideFullData(id: string) {
     const frontmatter = await this.getFrontmatter(id);
-    const processedContent = await remark().use(html).process(frontmatter.content);
+    const processedContent = await makeProcessor().process(frontmatter.content);
     const content = processedContent.toString();
     const summary = (await this.provideSummaries()).find((w) => w.id === id);
     return { content, ...summary } as IWorkWithContent;
