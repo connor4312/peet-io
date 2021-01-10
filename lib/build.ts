@@ -3,7 +3,7 @@ import { join } from 'path';
 import RSS from 'rss';
 import { posts } from '../lib/static-content';
 
-const siteUrl = 'https://80d214450b3e.ngrok.io';
+const siteUrl = 'https://peet.io';
 
 export const build = () => Promise.all([buildRssFeed()]);
 
