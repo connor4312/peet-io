@@ -7,7 +7,7 @@ I was showing off the neat things I could do with my [Home Assistant](https://ww
 
 ## Buying
 
-The Home Assistant docs recommend a Raspberry Pi model B with 4GB of RAM as a hardward configuration. But getting the Pi, power adapter, case, suitable SD card, and micro HDMI to HDMI converter adds up to around $90 on Adafruit pre-tax. Meanwhile there's lots of old computers on Ebay looking for a home, which would be much more interesting to play with. That search brought me to this beauty, the "Nexcom NDiS-163 Digital Signage Player":
+The Home Assistant docs recommend a Raspberry Pi model B with 4GB of RAM as a hardware configuration. But getting the Pi, power adapter, case, suitable SD card, and micro HDMI to HDMI converter adds up to around $90 on Adafruit pre-tax. Meanwhile there's lots of old computers on Ebay looking for a home, which would be much more interesting to play with. That search brought me to this beauty, the "Nexcom NDiS-163 Digital Signage Player":
 
 [![](/blog/0003/system.jpg)](/blog/0003/system.jpg)
 
@@ -21,13 +21,13 @@ It arrives! It's surprisingly well constructed, and _heavy_. The top of the boar
 
 [![](/blog/0003/opened.jpg)](/blog/0003/opened.jpg)
 
-The BIOS worried me for a moment reporting IDE drives, but it turned out to house a 2.5" SATA drive after all. I swapped out the hard drive for a $25, 128GB ADATA SSD. That brought the budget to $68, but I'm much happier running an SSD over an SD card, especially for Home Assistant that writes and reads from its sqlite database frequently. Best of all, there's no longer any moving parts making it completely silent.
+The BIOS worried me for a moment reporting IDE drives, but it turned out to house a 2.5" SATA drive after all. I swapped out the hard drive for a $25, 128GB ADATA SSD. That brought the budget to $68, but I'm much happier running an SSD over an hard drive (or an SD card, for a Pi) for Home Assistant that writes and reads from its sqlite database frequently. Best of all, there's no longer any moving parts, making it completely silent.
 
 ## Software
 
 This is not exactly a Threadripper system, so I went with [Alpine Linux](https://alpinelinux.org/) as a small, lightweight Linux distro. It took some fiddling to get the bootable USB to work, but after formatting using [Rufus](https://rufus.ie/) in "ISO Mode" it installed smoothly.
 
-After getting it running, my next natural step was to use VS Code's [remote SSH](https://code.visualstudio.com/docs/remote/ssh) to connect to it and start setting up Home Assistant, but I ran into two problems. First was that the remtoe server expected `bash` to be installed, and didn't work with Alpine's default `ash` shell. I installed `bash` manually, which got me further, but then I ran into an "unsupported architecture" error. Though we ship a 32-bit Windows build of VS Code, we don't ship 32-bit Linux!
+After getting it running, my next natural step was to use VS Code's [remote SSH](https://code.visualstudio.com/docs/remote/ssh) to connect to it and start setting up Home Assistant, but I ran into two problems. First was that the remote server expected `bash` to be installed, and didn't work with Alpine's default `ash` shell. I installed `bash` manually, which got me further, but then I ran into an "unsupported architecture" error. Though we ship a 32-bit Windows build of VS Code, we don't ship 32-bit Linux!
 
 So I was stuck manually `ssh`'ing in like the good ol' days. But that's alright, a quick `apk add docker` and a drop of my [docker-compose.yml](https://gist.github.com/connor4312/f16544bcc5b48af345a94feedb5a0ee1) (which runs the fantastic [zigbee2mqtt](https://www.zigbee2mqtt.io/) and a [mosqitto](https://mosquitto.org/) server) and we're good to go:
 
