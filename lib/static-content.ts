@@ -122,7 +122,6 @@ class BlogContentProvider extends StaticContentProvider<IPost, IPostWithContent>
       .use(() => (root) => {
         const node = getFirstMd(root, (n) => n.tagName === 'p');
         root.children = node ? [node] : [];
-        console.log(JSON.stringify(root.children, null, 2));
       })
       .process(frontmatter.content);
 
