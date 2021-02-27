@@ -37,7 +37,7 @@ The Zigbee dongle is still on the way -- a Conbee II, in this case, since it'll 
 
 ## It Works Well
 
-There's innumerable of listings for mini PC's on Ebay at any time. Lots embedded machines like this for signage or projecting equipment, as well as old Chromeboxes, compact ThinkStations, and so on. Instead of buying a new Raspberry Pi off the production line, consider saving one of these computers from becoming e-waste. Chances are it'll be a bit cheaper, and if you need GPIO you can [get that via USB](https://www.aliexpress.com/wholesale?catId=0&initiative_id=SB_20210226225356&SearchText=FT232H) pretty easily.
+There's innumerable listings for mini PC's on Ebay at any time: lots embedded machines like this for signage or projecting equipment, as well as old Chromeboxes, compact ThinkStations, and so on. Instead of buying a new Raspberry Pi off the production line, consider saving one of these computers from becoming e-waste. Chances are it'll be a bit cheaper, and if you need GPIO you can [get that via USB](https://www.aliexpress.com/wholesale?catId=0&initiative_id=SB_20210226225356&SearchText=FT232H) pretty easily.
 
 The downsides are:
 

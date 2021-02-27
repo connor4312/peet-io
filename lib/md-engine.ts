@@ -1,3 +1,4 @@
+import raw from 'rehype-raw';
 import shiki from 'rehype-shiki';
 import html from 'rehype-stringify';
 import footnotes from 'remark-footnotes';
@@ -11,7 +12,8 @@ export const makeProcessor = () =>
     .use(markdown)
     .use(footnotes, { inlineNotes: true })
     .use(() => prettifyMarkup)
-    .use(remark2rehype)
+    .use(remark2rehype, { allowDangerousHtml: true })
+    .use(raw)
     .use(shiki, { theme: `${process.cwd()}/lib/monochrome-dark.json` })
     .use(html);
 
