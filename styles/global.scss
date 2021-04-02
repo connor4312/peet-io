@@ -54,7 +54,6 @@ a {
 .long-form {
   p {
     margin-bottom: 1em;
-    text-align: justify;
 
     @include screen-max-md {
       text-align: left;
